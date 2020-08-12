@@ -24,6 +24,22 @@ module.exports = {
         ],
       },
       {
+        /** SVG Loaders
+
+         */
+        test: /\.svg$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/images/',
+            },
+          },
+        ],
+      },
+      {
         // JSON Loader
         type: 'javascript/auto',
         test: /\.(json)/,
@@ -50,22 +66,6 @@ module.exports = {
             options: {
               name: '[name].[ext]',
               outputPath: 'assets/fonts/',
-            },
-          },
-        ],
-      },
-      {
-        /** SVG Loaders
-
-         */
-        test: /\.svg$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/images/',
             },
           },
         ],
@@ -119,7 +119,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: PACKAGE.name,
-      template: './src/index.html',
+      template: path.resolve(__dirname, '../src/index.html'),
+      favicon: './src/assets/favicon.png',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -129,7 +130,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../', 'dist'),
     publicPath: '',
-    filename: 'bundle.js',
+    filename: 'main[hash].js',
   },
   stats: {
     chunks: false,

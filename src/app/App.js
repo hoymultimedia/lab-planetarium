@@ -25,6 +25,7 @@ export default class App {
       antialias: true,
       autoDensity: true,
       resolution: window.devicePixelRatio,
+      transparent: false,
       backgroundColor: 0x22353b,
     });
     appStore.width = this.width;
